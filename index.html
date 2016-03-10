@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CSS Grid Layout</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/screen-16x10.css">
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <script async src="https://assets.codepen.io/assets/embed/ei.js"></script>
+</head>
+
+<body class="shower list">
+    <header class="caption">
+        <h1>CSS Grid Layout.
+          <br>Готовность номер один</h1>
+        <div class="author">Наталия Короткова</div>
+    </header>
+
+    <section class="slide first">
+        <h2 class="title title-main">CSS Grid Layout.<br><span>Готовность номер один</span></h2>
+        <p class="subtitle">Наталия<br>Короткова</p>
+        <div class="title-box"></div>
+        <div class="title-box-small"></div>
+    </section>
+
+    <section class="slide">
+      <h2>Включаем</h2>
+      <table class="browsers">
+          <tr>
+              <th scope="row">Chrome</th>
+              <td><code class="code-clean">chrome://flags/#enable-experimental-web-platform-features</code></td>
+          </tr>
+          <tr>
+              <th scope="row">Opera</th>
+              <td><code class="code-clean">opera://flags/#enable-experimental-web-platform-features</code></td>
+          </tr>
+          <tr>
+              <th scope="row">Firefox</th>
+              <td><code class="code-clean">about:config</code> — <code class="code-clean">layout.css.grid.enabled</code></td>
+          </tr>
+      </table>
+    </section>
+
+    <section class="slide">
+        <figure>
+            <blockquote>
+                <p>From the very beginning of CSS, there has been a giant,
+                    <br>layout-shaped hole at its center.</p>
+            </blockquote>
+            <figcaption>— Eric Meyer</figcaption>
+        </figure>
+        <img src="pictures/Eric-Meyer.jpg" width="250" height="187" alt="Eric Meyer">
+    </section>
+
+    <section class="slide">
+        <h2>Способы
+          <br>разметки страницы</h2>
+    </section>
+
+    <section class="slide">
+        <h2><code>&lt;table&gt;</code></h2>
+        <ul>
+            <li>не подходит для отзывчивого веб-дизайна</li>
+            <li>иерархическая структура вложенных тегов</li>
+            <li>сложная поддержка и редизайн</li>
+            <li>отсутствие нормальной спецификации привело к багам</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><code>display: table;</code></h2>
+        <p>Следующий этап развития <code>&lt;table&gt;</code></p>
+        <p>Элементы начинают обрабатываться как как ячейки таблицы.</p>
+    </section>
+
+    <section class="slide">
+        <h2><code>float</code></h2>
+        <ul>
+            <li>исключает элемент из нормального потока</li>
+            <li><code>clear</code> или <code>overflow</code></li>
+            <li>«float first»</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><code>display: inline-block;</code></h2>
+        <ul>
+            <li>«блок-строка»</li>
+            <li>отступы между элементами</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><code>position: absolute;</code></h2>
+        <ul>
+            <li>элемент исключен из потока</li>
+            <li>риск перекрытия</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><code>display: flex;</code></h2>
+        <ul>
+            <li>раскладка только в одном направлении</li>
+            <li>необходимость создавать новые контейнеры-обёртки</li>
+            <li>верстка подстраивается под контент, а не <a href="https://jakearchibald.com/2014/dont-use-flexbox-for-page-layout/" target="_blank">наоборот</a></li>
+        </ul>
+    </section>
+
+    <!--section class="slide">
+        <h2>CSS-фреймворк → ∞</h2>
+        <img class="place" src="pictures/css-frameworks.jpg" width="440" height="228" alt="CSS-фреймворки">
+    </section-->
+
+    <section class="slide">
+        <h2>CSS-фреймворки</h2>
+        <p>Огромное кол-во систем<br>построения разметки.</p>
+        <img class="place r" src="pictures/bg-frameworks.jpg" width="426" height="640" alt="CSS-фреймворки">
+    </section>
+
+    <section class="slide">
+        <pre>
+			<code class="html">&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-xs-4 col-sm-6 col-md-5
+        col-md-offset-2 col-lg-6 col-lg-offset-0"&gt;
+            ...
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </code>
+		</pre>
+    </section>
+
+    <section class="slide">
+        <h2>Препроцессор и миксины</h2>
+        <pre>
+          <code class="css">.my-wrapper {
+  .make-row();
+}
+.my-element {
+  .make-lg-column(8);
+}
+          </code>
+        </pre>
+    </section>
+
+    <section class="slide">
+      <table>
+        <tr>
+          <td>
+            <h2>Lost Grid</h2>
+            <pre>
+              <code>.my-element {
+  lost-column: 1/3;
+}</code>
+            </pre>
+          </td>
+          <td>
+            <pre>
+              <code class="css css-small">lost-utility
+lost-flex-container
+lost-center
+lost-align
+lost-column
+lost-row
+lost-waffle
+lost-offset
+lost-move
+lost-masonry-wrap
+lost-masonry-column
+              </code>
+            </pre>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="slide">
+      <h2>Но</h2>
+      <ul>
+        <li>зачастую «под капотом» всё те же хаки</li>
+        <li>нужно освоить фреймворк</li>
+        <li>следовать правилам, которые он диктует</li>
+        <li>и еще одна мелочь ...</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <p>... как заставить дизайнера следовать модульной сетке?</p>
+      <img src="pictures/sad.jpg" alt="">
+    </section>
+
+    <section class="slide">
+        <h2>CSS Grid Layout</h2>
+        <p>Предложен <b>Microsoft</b> в 2011</p>
+        <img class="place r" src="pictures/bg-hero.jpg" width="426" height="640" alt=" Супергерой">
+    </section>
+
+    <section class="slide">
+        <h2>Рисуем виртуальную сетку</h2>
+        <pre>
+  			<code>.my-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr 100px;
+  grid-template-rows:  80px 80px 80px;
+}</code>
+		</pre>
+    </section>
+
+    <section class="slide">
+      <p data-height="400" data-theme-id="22457" data-slug-hash="dMogrZ" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/dMogrZ/">CSS Grid Layout</a> by Nataliya Karatkova on CodePen.</p>
+    </section>
+
+    <section class="slide">
+      <p data-height="400" data-theme-id="22457" data-slug-hash="jqPRwG" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/jqPRwG/">CSS Grid Layout - 2</a> by Nataliya Karatkova on CodePen.</p>
+    </section>
+
+    <section class="slide">
+        <pre>
+  			<code>.my-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr 100px;
+  grid-template-rows:  80px 80px 80px;
+}</code>
+		</pre>
+    </section>
+
+    <section class="slide">
+        <pre>
+  			<code>.my-grid {
+  display: grid;
+  grid: 250px 1fr 100px / repeat(3, 80px);
+}</code>
+		</pre>
+    </section>
+
+    <section class="slide">
+      <h2>Что за <code>fr</code>?</h2>
+      <p>Доля (<b><i>fraction</i></b>) оставшегося пространства</p>
+      <p data-height="250" data-theme-id="22457" data-slug-hash="KzpLoY" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/KzpLoY/">CSS Grid Layout - fraction</a> by Nataliya Karatkova on CodePen.</p>
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code>.my-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}</code>
+      </pre>
+      <p data-height="200" data-theme-id="22457" data-slug-hash="wGKweX" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/wGKweX/">CSS Grid Layout - Auto-placement</a> by Nataliya Karatkova on CodePen.</p>
+    </section>
+
+    <section class="slide">
+        <h2>Единицы измерения</h2>
+        <ul>
+            <li><code>px</code>, <code>rem</code>, <code>em</code>, <code>vw</code> и т. д.</li>
+            <li><code>%</code></li>
+            <li><code>fr</code></li>
+            <li><code>max-content</code>, <code>min-content</code>, <code>minmax(<i>min</i>, <i>max</i>)</code></li>
+            <li><code>auto</code></li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Цепляем к сетке</h2>
+        <img class="place r" src="pictures/bg-attach.jpg" width="426" height="640" alt="Цепляем к сетке">
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-линии</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+          </code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="QNbXRK" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/QNbXRK/">CSS Grid Layout - Simple</a> by Nataliya Karatkova on CodePen.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-линии</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: span 2;
+}
+          </code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="QNbXRK" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/QNbXRK/">CSS Grid Layout - Simple</a> by Nataliya Karatkova on CodePen.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-линии</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-column-start: -2;
+  grid-column-end: -1;
+  grid-row-start: -3;
+  grid-row-end: span 2;
+}
+          </code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="GZZeMy" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="http://codepen.io/meuwka/pen/GZZeMy/">CSS Grid Layout - Simple2</a> by Nataliya Karatkova (<a href="http://codepen.io/meuwka">@meuwka</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-линии</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-column: -2 / -1;
+  grid-row: -3 / span 2;
+}</code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="GZZeMy" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="http://codepen.io/meuwka/pen/GZZeMy/">CSS Grid Layout - Simple2</a> by Nataliya Karatkova (<a href="http://codepen.io/meuwka">@meuwka</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-линии</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-column: -2;
+  grid-row: -3 / span 2;
+}</code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="QNbXRK" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/QNbXRK/">CSS Grid Layout - Simple</a> by Nataliya Karatkova on CodePen.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-left">
+        <h2>Грид-область</h2>
+        <pre>
+          <code class="css">.my-element {
+  grid-area: 2 / 3 / 4 / 4;
+}</code>
+        </pre>
+      </div>
+      <div class="slide-right">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="QNbXRK" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/QNbXRK/">CSS Grid Layout - Simple</a> by Nataliya Karatkova on CodePen.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Шпаргалка</h2>
+      <table class="table-area">
+        <tr>
+          <td><code>grid-column-start</code></td>
+          <td><code>grid-column-end</code></td>
+          <td><code>grid-row-start</code></td>
+          <td><code>grid-row-end</code></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <code>grid-column</code>
+          </td>
+          <td colspan="2">
+            <code>grid-row</code>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4"><code>grid-area</code></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code class="css">.my-element {
+  grid-area: 2 / 3 / 4 / 4;
+}</code>
+      </pre>
+      <p>
+        <code>grid-row-start</code>
+        <br>
+        <code>grid-column-start</code>
+        <br>
+        <code>grid-row-end</code>
+        <br>
+        <code>grid-column-end</code>
+      </p>
+      <img class="place r b" src="pictures/why.jpg" alt="Однако">
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code class="css">.my-element {
+  grid-area: my-name-for-this-area;
+}</code>
+      </pre>
+    </section>
+
+    <section class="slide">
+      <img class="place" src="pictures/example.jpg" alt="">
+    </section>
+
+    <section class="slide">
+        <pre>
+          <code class="css">.header { grid-area: header; }
+.main   { grid-area: main; }
+.footer { grid-area: footer; }</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <pre>
+    <code class="css">body {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto minmax(auto, 1fr) auto;
+  grid-template-areas: "header"
+                       "main"
+                       "footer";
+}</code>
+  </pre>
+    </section>
+
+    <section class="slide">
+      <div class="phone">
+        <p data-height="400" data-theme-id="22457" data-slug-hash="KzdwLe" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/KzdwLe/">CSS Grid Layout - Layout</a> by Nataliya Karatkova on CodePen.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <p data-height="400" data-theme-id="22457" data-slug-hash="KzdwLe" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/KzdwLe/">CSS Grid Layout - Layout</a> by Nataliya Karatkova on CodePen.</p>
+    </section>
+
+    <section class="slide">
+        <pre>
+    <code class="css">@media (min-width: 768px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "header main"
+                         "footer main";
+  }
+}</code>
+  </pre>
+    </section>
+
+    <section class="slide">
+        <pre>
+    <code class="css">@media (min-width: 768px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "header main"
+                         "footer .";
+  }
+}</code>
+  </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Классно, правда?</h2>
+        <ul>
+          <li>интуитивно понятно</li>
+          <li>порядок элементов в разметке может быть любой</li>
+          <li>легкая адаптация с помощью media-запросов</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Грид-линии тоже можно именовать</h2>
+    </section>
+
+    <section class="slide">
+      <h2>Bootstrap</h2>
+      <img src="pictures/bootstrap-grid.jpg" width="800" height="222" alt="Bootstrap сетка" />
+    </section>
+
+    <section class="slide">
+        <pre>
+    <code>.grid {
+  display: grid;
+  grid-template-columns: repeat(12, [col] 1fr);
+  grid-template-rows: repeat(4, [row] auto);
+  grid-row-gap: 14px;
+}</code>
+  </pre>
+    </section>
+
+    <section class="slide">
+      <h2>Колонки</h2>
+      <img src="pictures/bootstrap-grid-cols.jpg" width="800" height="222" alt="Колонки" />
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code>&lt;div class="grid"&gt;
+  &lt;div class="element element--1">1&lt;/div&gt;
+  &lt;div class="element element--2">1&lt;/div&gt;
+  ...
+  &lt;div class="element element--18">6&lt;/div&gt;
+  &lt;div class="element element--19">6&lt;/div&gt;
+&lt;/div&gt;</code>
+      </pre>
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code>.element--13 {
+  grid-column: col 1 / span 8;
+  grid-row: row 2;
+}</code>
+      </pre>
+      <p data-height="420" data-theme-id="22457" data-slug-hash="XdmWbj" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="http://codepen.io/meuwka/pen/XdmWbj/">CSS Grid Layout - Named Grid Lines</a> by Nataliya Karatkova (<a href="http://codepen.io/meuwka">@meuwka</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+    </section>
+
+    <section class="slide">
+      <pre>
+        <code>.element--13 {
+  grid-column: col 1 / span 8;
+  grid-row: row 2 / span 2;
+}</code>
+      </pre>
+      <p data-height="420" data-theme-id="22457" data-slug-hash="yOOrbJ" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="http://codepen.io/meuwka/pen/yOOrbJ/">CSS Grid Layout - Named Grid Lines2</a> by Nataliya Karatkova (<a href="http://codepen.io/meuwka">@meuwka</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Выравнивание</h2>
+      <p>
+        Хотим центрирование по вертикали!
+      </p>
+    </section>
+
+    <section class="slide">
+      <h2>Грид-элемент</h2>
+      <p data-height="420" data-theme-id="22457" data-slug-hash="YqwwEo" data-default-tab="result" data-user="meuwka" class="codepen">See the Pen <a href="https://codepen.io/meuwka/pen/YqwwEo/">CSS Grid Layout - Alignment</a> by Nataliya Karatkova (<a href="https://codepen.io/meuwka">@meuwka</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Грид-контейнер</h2>
+      <p>
+        <code>align-items</code>
+      </p>
+      <p>
+        <code>justify-items </code>
+      </p>
+    </section>
+
+    <section class="slide">
+      <h2>Отступы</h2>
+      <table>
+        <tr>
+          <td>
+            <p><b>Автоматические</b></p>
+            <p><code>align-content</code></p>
+            <p><code>justify-content</code></p>
+          </td>
+          <td>
+            <p><b>Задаём вручную</b></p>
+            <p><code>grid-row-gap</code></p>
+            <p><code>grid-column-gap</code></p>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="slide caniuse">
+        <h2><a href="http://caniuse.com/#feat=css-grid" target="_blank">Can I use</a></h2>
+        <p>10 марта 2016</p>
+        <img src="pictures/caniuse.jpg" width="700" alt="">
+    </section>
+
+    <section class="slide">
+      <p>
+        <b>8 марта</b> - Firefox 45
+      </p>
+      <p>
+        <b>19 апреля</b> - Chrome 50
+      </p>
+      <img class="place b" src="pictures/bg-browsers.jpg" width="600" alt="Браузеры">
+    </section>
+
+    <section class="slide">
+        <table class="browsers">
+            <tr>
+                <th scope="row">Chrome</th>
+                <td><code class="code-clean">chrome://flags/#enable-experimental-web-platform-features</code></td>
+            </tr>
+            <tr>
+                <th scope="row">Opera</th>
+                <td><code class="code-clean">opera://flags/#enable-experimental-web-platform-features</code></td>
+            </tr>
+            <tr>
+                <th scope="row">Firefox</th>
+                <td><code class="code-clean">about:config</code> — <code class="code-clean">layout.css.grid.enabled</code></td>
+            </tr>
+            <tr>
+                <th scope="row">IE10+, Edge</th>
+                <td><code>-ms</code> имплементация отличается</td>
+            </tr>
+            <tr>
+                <th scope="row">WebKit Nightly</th>
+                <td><code>-webkit</code></td>
+            </tr>
+        </table>
+        <p class="text-center"><a href="https://github.com/FremyCompany/css-grid-polyfill/" target="_blank"><b>CSS Grid Polyfill</b></a></p>
+    </section>
+
+    <section class="slide">
+      <h2>Подсетки</h2>
+      <code>display: subgrid;</code>
+      <br><br>
+      <p>
+        <a href="http://css-live.ru/articles/podsetki-v-grid-layout-zhiznenno-vazhny.html" target="_blank">Подсетки в Grid Layout жизненно важны</a>
+      </p>
+    </section>
+
+    <section class="slide">
+        <h2>Экспериментируйте!</h2>
+        <ul>
+            <li>обратная связь с разработчиками</li>
+            <li><a href="http://fantasai.inkedblade.net/style/events/grid-workshop" target="_blank">CSS Grid Layout Spec Workshop</a></li>
+            <li>прототипы и админки</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Больше примеров</h2>
+      <ul>
+        <li><a href="http://gridbyexample.com/" target="_blank">Примеры от Рейчел Эндрю</a></li>
+        <li><a href="https://igalia.github.io/css-grid-layout/index.html" target="_blank">Примеры от Igalia</a></li>
+        <li><a href="https://hacks.mozilla.org/2015/09/the-future-of-layout-with-css-grid-layouts/"target="_blank">Классный пример с Dribbble</a></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Что почитать</h2>
+        <ul>
+            <li>(EN) <a href="https://drafts.csswg.org/css-grid/" target="_blank">Спецификация</a></li>
+            <li>(RU) <a href="http://css-live.ru/tag/css3-grid-layout" target="_blank">Переводы CSS-live.ru</a></li>
+            <li>(EN) <a href="http://blogs.igalia.com/mrego/tag/css-grid-layout/" target="_blank">Статьи Мануэля Рего</a></li>
+        </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Неявный грид</h2>
+      <ul>
+        <li>(EN) <a href="http://blogs.igalia.com/mrego/2016/02/01/deep-dive-into-grid-layout-placement/" target="_blank">Deep Dive into Grid Layout Placement</a></li>
+        <li>(RU) <a href="http://css-live.ru/articles/podrobno-o-razmeshhenii-elementov-v-grid-raskladke-css-grid-layout.html" target="_blank">Перевод CSS-live.ru</a></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Что посмотреть</h2>
+        <ul>
+            <li>
+                (EN)
+                <a href="https://www.youtube.com/watch?v=3M_rbUYtWzk" target="_blank">CSS Grid Layout from the inside out</a> - Manuel Rego, Igalia
+            </li>
+            <li>
+                (EN) <a href="https://www.youtube.com/watch?v=Felq4z_rdPQ" target="_blank">Start using CSS Grid Layout</a> - Rachel Andrew
+            </li>
+            <li>
+              (EN) <a href="https://vimeo.com/98746172" target="_blank">Present and Future of CSS Layout</a> -Tab Atkins</li>
+            <li>
+                (RU) Можно вообще всё. Раскладка по гриду - Вадим Макеев
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <p style="float: right;">
+          <i>код</i>
+          <br>
+          <b>SUPERCSSGRID</b>
+          <br><i>до конца марта 2016</i>
+        </p>
+        <p><b>«Get Ready for
+          <br>CSS Grid Layout»</b>
+          <br>by Rachel Andrew
+        </p>
+        <a href="https://abookapart.com/products/get-ready-for-css-grid-layout" target="_blank"><img class="place" src="pictures/Get-Ready-for-CSS-Grid-Layout.jpg" width="270" height="420" alt="Get Ready for CSS Grid Layout by Rachel Andrew"></a>
+    </section>
+
+    <section class="slide">
+        <h2 class="title">Спасибо!</h2>
+        <p>Twitter: <a href="https://twitter.com/meuwka" target="_blank">@meuwka</a></p>
+        <p>Facebook: <a href="" target="_blank">Nataliya Karatkova</a></p></p>
+    </section>
+
+    <div class="progress"></div>
+    <script src="shower/shower.min.js"></script>
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>
